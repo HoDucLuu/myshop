@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'ui/products/products_manager.dart';
+import 'ui/products/products_detail_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,13 +23,16 @@ class MyApp extends StatelessWidget {
             secondary: Colors.deepOrange,
           ),
         ),
-        home: Scaffold(
-          appBar: AppBar(
-            title: const Text('MyShop'),
-          ),
-          body: const Center(
-            child: Text('Wellcome to MyShop'),
-          ),
+        // home: Scaffold(
+        //   appBar: AppBar(
+        //     title: const Text('MyShop'),
+        //   ),
+        //   body: const Center(
+        //     child: Text('Wellcome to MyShop'),
+        //   ),
+        // ),
+        home: SafeArea(
+          child: ProductsDetailScreen(ProductsManager().items[0]),
         ));
   }
 }
