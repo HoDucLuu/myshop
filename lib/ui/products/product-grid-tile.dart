@@ -18,9 +18,9 @@ class ProductGridTile extends StatelessWidget {
         footer: buildGridFooterBar(context),
         child: GestureDetector(
           onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                  builder: (ctx) => ProductsDetailScreen(product)),
+            Navigator.of(context).pushNamed(
+              ProductsDetailScreen.routeName,
+              arguments: product.id,
             );
           },
           child: Image.network(
