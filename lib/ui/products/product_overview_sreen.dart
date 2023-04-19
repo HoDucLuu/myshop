@@ -34,12 +34,13 @@ class __ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
 
   Widget buildShoppingCartIcon() {
     return TopRightBadge(
-      data: CartManager().productCount,
-      child: IconButton(icon: const Icon(Icons.shopping_cart),
-      onPressed: () {
-        Navigator.of(context).pushNamed(CartScreen.routeName);
-      },
-    );
+        data: CartManager().productCount,
+        child: IconButton(
+          icon: const Icon(Icons.shopping_cart),
+          onPressed: () {
+            Navigator.of(context).pushNamed(CartScreen.routeName);
+          },
+        ));
   }
 
   Widget buildProductFilterMenu() {
