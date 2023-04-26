@@ -46,8 +46,10 @@ class MyApp extends StatelessWidget {
             final productId = settings.arguments as String;
             return MaterialPageRoute(
               builder: (ctx) {
-                return ProductsDetailScreen(
-                  ProductsManager().findById(productId)!,
+                return EditProductScreen(
+                  productId != null
+                      ? ctx.read<ProductsManager>().findById(productId)
+                      : null,
                 );
               },
             );

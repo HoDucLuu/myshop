@@ -47,7 +47,8 @@ class UserProductListTitle extends StatelessWidget {
     return IconButton(
       icon: const Icon(Icons.edit),
       onPressed: () {
-        print("go to edit product screen");
+        Navigator.of(context)
+            .pushNamed(EditProductScreen.routeName, arguments: product.id);
       },
       color: Theme.of(context).primaryColor,
     );
