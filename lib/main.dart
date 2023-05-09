@@ -19,8 +19,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => AuthManager(),
         ),
-        ChangeNotifierProvider(
+        ChangeNotifierProxyProvider<AuthManager, ProductsManager>(
           create: (ctx) => ProductsManager(),
+          update: (ctx, authManager, productmanager) {
+            productmanager!.AuthToken = authManager.authToken;
+            return productmanager;
+          },
         ),
         ChangeNotifierProvider(
           create: (ctx) => CartManager(),
@@ -29,7 +33,7 @@ class MyApp extends StatelessWidget {
           create: (ctx) => OrdersManager(),
         ),
       ],
-      child: Consumer<AuthManager>(builder: (context, AuthManager, child) {
+      child: Consumer<AuthManager>(builder: (ctx, authManager, child) {
         return MaterialApp(
           title: 'MyShop',
           debugShowCheckedModeBanner: false,
@@ -41,11 +45,11 @@ class MyApp extends StatelessWidget {
               secondary: Colors.deepOrange,
             ),
           ),
-          home: AuthManager.isAuth
+          home: authManager.isAuth
               ? ProductsOverviewScreen()
               : FutureBuilder(
-                  future: AuthManager.tryAutoLogin(),
-                  builder: (context, snapshot) {
+                  future: authManager.tryAutoLogin(),
+                  builder: (ctx, snapshot) {
                     return snapshot.connectionState == ConnectionState.waiting
                         ? const SplashScreen()
                         : const AuthScreen();
